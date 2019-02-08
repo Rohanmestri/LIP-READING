@@ -2,6 +2,11 @@ package com.tzutalin.dlibtest;
 
 import org.deeplearning4j.nn.conf.NeuralNetConfiguration;
 import org.deeplearning4j.nn.conf.Updater;
+import org.deeplearning4j.nn.modelimport.keras.KerasModelImport;
+import org.deeplearning4j.nn.modelimport.keras.exceptions.InvalidKerasConfigurationException;
+import org.deeplearning4j.nn.modelimport.keras.exceptions.UnsupportedKerasConfigurationException;
+import org.deeplearning4j.nn.multilayer.MultiLayerNetwork;
+import org.nd4j.linalg.io.ClassPathResource;
 import org.opencv.android.BaseLoaderCallback;
 import org.opencv.android.CameraBridgeViewBase.CvCameraViewFrame;
 import org.opencv.android.LoaderCallbackInterface;
@@ -28,6 +33,8 @@ import com.tzutalin.dlib.FaceDet;
 import com.tzutalin.dlib.VisionDetRet;
 
 import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -65,6 +72,31 @@ public class Processing extends Activity implements CvCameraViewListener2 {
 
                     NeuralNetConfiguration.Builder nncBuilder = new NeuralNetConfiguration.Builder();
                     nncBuilder.updater(Updater.ADAM);
+
+
+                    try{
+                        try {
+                            String simpleMlp = new ClassPathResource(
+                                    "model_dl4j.h5").getFile().getPath();
+                            MultiLayerNetwork model = KerasModelImport.
+                                    importKerasSequentialModelAndWeights(simpleMlp);
+
+                            System.out.println("model loaded");
+                        }
+                        catch(InvalidKerasConfigurationException ioEx)
+                        {
+                            ioEx.printStackTrace();
+                        }
+
+                        catch (UnsupportedKerasConfigurationException i)
+                        {
+                            i.printStackTrace();
+                        }
+
+
+                    } catch(IOException ioEx) {
+                        ioEx.printStackTrace();
+                    }
 
 
                     if (mFaceDet == null) {
@@ -132,7 +164,7 @@ public class Processing extends Activity implements CvCameraViewListener2 {
     }
 
     public void onCameraViewStopped() {
-        mRgba.release();
+
     }
 
 
@@ -151,7 +183,8 @@ public class Processing extends Activity implements CvCameraViewListener2 {
             for (Point point : landmarks)
             {
                 org.opencv.core.Point opencv_point = new org.opencv.core.Point((double) point.x,(double) point.y);
-                Imgproc.drawMarker(mRgba,opencv_point,new Scalar(0, 0, 255));
+                //Imgproc.drawMarker(mRgba,opencv_point,new Scalar(0, 0, 255));
+                Imgproc.circle(mRgba,opencv_point,1,new Scalar(0, 0, 255),-1);
             }
         }
 

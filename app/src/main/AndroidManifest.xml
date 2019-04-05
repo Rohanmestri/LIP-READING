@@ -18,8 +18,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".Processing"
-            android:screenOrientation="landscape"
+            android:name=".Start_Screen"
+            android:screenOrientation="portrait"
             android:label="@string/app_name"
             android:theme="@android:style/Theme.NoTitleBar.Fullscreen">
             <intent-filter>
@@ -35,6 +35,29 @@
             android:configChanges="orientation|screenSize"
             android:label="@string/app_name">
         </activity>
+
+        <activity
+            android:name=".Show_Features"
+            android:screenOrientation="landscape"
+            android:theme="@android:style/Theme.NoTitleBar.Fullscreen"
+            android:label="dlib-android-application">
+        </activity>
+
+        <activity
+            android:name=".Processing"
+            android:screenOrientation="landscape"
+            android:theme="@android:style/Theme.NoTitleBar.Fullscreen"
+            android:label="dlib-android-application">>
+        </activity>
+
+        <activity
+            android:name=".Result"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.NoTitleBar.Fullscreen"
+            android:label="dlib-android-application">>
+        </activity>
+
+
     </application>
 
 </manifest>

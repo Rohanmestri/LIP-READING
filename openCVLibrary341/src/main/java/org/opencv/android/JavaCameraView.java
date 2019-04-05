@@ -136,11 +136,29 @@ public class JavaCameraView extends CameraBridgeViewBase implements PreviewCallb
             if (mCamera == null)
                 return false;
 
+
+
             /* Now set camera parameters */
             try {
                 Camera.Parameters params = mCamera.getParameters();
                 Log.d(TAG, "getSupportedPreviewSizes()");
+
                 List<android.hardware.Camera.Size> sizes = params.getSupportedPreviewSizes();
+
+                int[] temp2 = new int[2];
+                List<int[]> temp = params.getSupportedPreviewFpsRange();
+                for(int i=0;i<temp.toArray().length;i++)
+                {
+                    temp2 = temp.get(i);
+                    //for(int j=0;j<temp2.length;j++)
+                        //System.out.println(temp2[j]);
+                }
+                params.setPreviewFpsRange(24000,24000);
+
+                for(int j=0;j<temp2.length;j++)
+                 System.out.println(temp2[j]);
+
+                System.out.println("GTYVDFJHBUDVBSDHVSBDVKSDBVKS UVSVBSVJHDKJVS DV SJDV JS DVJSD V");
 
                 if (sizes != null) {
                     /* Select the size that fits surface considering maximum size allowed */
@@ -163,7 +181,7 @@ public class JavaCameraView extends CameraBridgeViewBase implements PreviewCallb
 
                     Log.d(TAG, "Set preview size to " + Integer.valueOf((int)frameSize.width) + "x" + Integer.valueOf((int)frameSize.height));
                     //params.setPreviewSize((int)frameSize.width, (int)frameSize.height);
-                    params.setPreviewSize(1280,720);
+                    params.setPreviewSize(480,360);
                     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.ICE_CREAM_SANDWICH && !android.os.Build.MODEL.equals("GT-I9100"))
                         params.setRecordingHint(true);
 

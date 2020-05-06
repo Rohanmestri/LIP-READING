@@ -6,7 +6,7 @@ A real-time android application which captures video frames from a person speaki
 
 * The Feature Extraction Stage is carried out by a HOG-SVM classifier pretrained to detect 68 landmark points on a given face. 
 * The features surrounding the lip-region are stored in the form of Euclidean Distances. 
-* These 20 features from each frame (29 frames in total with 2 frames clipped from the start and the end) are fed into LSTM layers
+* These 20 features from each frame (29 frames - with 2 frames clipped from the start and the end) are fed into LSTM layers.
 * The output of the final LSTM layer is attached to FC layers, which give the probabilistic output corresponding to each word.
 
 ### Prerequisites

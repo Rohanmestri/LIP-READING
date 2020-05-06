@@ -1,10 +1,13 @@
-# Project Title
+# Lip Reading using Deep Learning
 
-One Paragraph of project description goes here
+A real-time android application which captures video frames from a person speaking a particular word and run the trained inference model to predict the spoken word. 
 
-## Getting Started
+## Implementation
 
-These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See deployment for notes on how to deploy the project on a live system.
+* The Feature Extraction Stage is carried out by a HOG-SVM classifier pretrained to detect 68 landmark points on a given face. 
+* The features surrounding the lip-region are stored in the form of Euclidean Distances. 
+* These 20 features from each frame (29 frames in total with 2 frames clipped from the start and the end) are fed into LSTM layers
+* The output of the final LSTM layer is attached to FC layers, which give the probabilistic output corresponding to each word.
 
 ### Prerequisites
 

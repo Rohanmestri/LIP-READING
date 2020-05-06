@@ -162,23 +162,16 @@ public class Processing extends Activity implements CvCameraViewListener2 {
             mOpenCvCameraView.disableView();
     }
 
-    public void onCameraViewStarted(int width, int height) {
+    public void onCameraViewStarted(int width, int height) {}
 
-
-    }
-
-    public void onCameraViewStopped() {
-
-    }
+    public void onCameraViewStopped() {}
 
 
     int frame_count = 0;
-    //ArrayList<Double>[][] euclid = new ArrayList[25][20];
     float[] euclid = new float[25*20];
-    //Classification res = null;
     float[] output_array = new float[4];
 
-    // This is the Main loop for processing individual frames - RM
+    // This is the Main loop for processing individual frames
     public Mat onCameraFrame(CvCameraViewFrame inputFrame) {
 
         if (frame_count<25) {
@@ -225,9 +218,6 @@ public class Processing extends Activity implements CvCameraViewListener2 {
                 }
             }
 
-            //for(int x=0;x<25;x++)
-              //  for (int y=0;y<20;y++)
-            //System.out.println(euclid[x][y]);
             if (frame_count == 24){
                 for (Classifier classifier : mClassifiers)
                      output_array = classifier.recognize(euclid);

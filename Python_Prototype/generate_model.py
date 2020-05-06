@@ -76,9 +76,6 @@ def RealTime_preprocess(path,length):
        for j in range(25):
            current_frame = i+j
            frame_list[j] = current_frame
-       
-       #print(frame_list)
-       #frame_list = [2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26]
 
        euclid_dist = np.empty(shape=(25,20))
        cap = cv2.VideoCapture(path)
@@ -91,7 +88,6 @@ def RealTime_preprocess(path,length):
          if ret == True:
            if count in frame_list:
               gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
-              #gray = cv2.resize(gray,(0,0),fx=0.36,fy=0.36)
               detected_faces = face_detector(gray, 1)
               for i, face_rect in enumerate(detected_faces):
                  pose_landmarks = face_pose_predictor(gray, face_rect)
@@ -113,13 +109,10 @@ def RealTime_preprocess(path,length):
        
        euclid_dist = euclid_dist.reshape((1,25,20))
        euclid_dist = euclid_dist/4.16
-       #print(euclid_dist)
        
        y = int(loaded_model.predict_classes(euclid_dist))
        y2 = loaded_model.predict_proba(euclid_dist)
        temp = list(words.keys())
-       #print(temp[y])
-       print(temp[y],y2)
        cap.release()
        
    
@@ -277,8 +270,6 @@ def create_dataset(list_of_words):
 
 ######################################### Loading the prepared data ####################################################################################################
 
-#words = {'ABOUT':1,'ABSOLUTELY':2,'ABUSE':3,'ACCESS':4,'ACCORDING':5,'ACCUSED':6,'ACROSS':7,'ACTION':8,'ACTUALLY':9, 'AFFAIRS':10}
-
 words = {'ABUSE':1,'BLACK':2,'EXACTLY':3,'CRIME':4}
 #Uncomment to save new data
 '''
@@ -352,28 +343,7 @@ model.compile(loss='categorical_crossentropy',
 model.fit(X_train, y_train,validation_data=[X_val,y_val], epochs=120, batch_size=256)
 model.summary()
 
-#model.save("model_dl4j.h5")
-
-'''
-#saving the model
-model_yaml = model.to_yaml()
-with open("model.yaml", "w") as yaml_file:
-    yaml_file.write(model_yaml)
-# serialize weights to HDF5
-model.save_weights("model.h5")
-print("Saved model to disk")
-
-#loading the model
-yaml_file = open('model.yaml', 'r')
-loaded_model_yaml = yaml_file.read()
-yaml_file.close()
-loaded_model = model_from_yaml(loaded_model_yaml)
-# load weights into new model
-loaded_model.load_weights("model.h5")
-print("Loaded model from disk")
-loaded_model.summary()
-'''
-
+#Saving the model - to be loaded in the app
 export_model(tf.train.Saver(), model, ["gru_1_input"], "dense_1/Softmax")
 
 

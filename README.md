@@ -19,7 +19,7 @@ A Real-Time Android Application which captures video frames from a person speaki
 
 * Clone the repository.
 * Have acces to the dataset and make sure to place it in the appropriate directory.
-* First run the generate_model.py found in the Python-Prototype directory to generate the model using the dataset.
+* First run the generate_model.py found in the Python_Prototype directory to generate the model using the dataset.
 * Export the saved model and incorporate it in the source code of the Android Application.
 * Make necessary changes in the Camera Interface source codes according to the mobile phone's specifications.
 * Run the application in Android for the words on which the model is trained.

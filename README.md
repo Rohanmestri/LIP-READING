@@ -1,6 +1,6 @@
 # Lip Reading using Deep Learning
 
-A real-time android application which captures video frames from a person speaking a particular word and runs the trained inference model in the backend to predict the spoken word. 
+A Real-Time Android Application which captures video frames from a person speaking a particular word and runs the trained inference model in the backend to predict the spoken word. 
 
 ## Implementation
 
@@ -11,4 +11,15 @@ A real-time android application which captures video frames from a person speaki
 
 ## Tech Stack 
 
-*Prototype - Python, Keras, Tensorflow, Opencv, Numpy, Dlib 
+* **Dataset** - Lip Reading in the Wild (BBC) 
+* **Prototype** - Python, Keras, Tensorflow, Opencv, Numpy, Dlib 
+* **Android App** - Java, Tensorflow Lite (Android), OpenCV-Android, Dlib-Android(Tzutalin)
+
+## How to Use
+
+* Clone the repository.
+* Have acces to the dataset and make sure to place it in the appropriate directory.
+* First run the generate_model.py found in the Python-Prototype directory to generate the model using the dataset.
+* Export the saved model and incorporate it in the source code of the Android Application.
+* Make necessary changes in the Camera Interface source codes according to the mobile phone's specifications.
+* Run the application in Android for the words on which the model is trained.
